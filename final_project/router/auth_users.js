@@ -14,6 +14,7 @@ const authenticatedUser = (username, password) => {
 };
 
 // Task 8: Login as a registered user
+// Task 8: Login as a registered user
 regd_users.post("/login", (req, res) => {
   const { username, password } = req.body;
 
@@ -24,7 +25,7 @@ regd_users.post("/login", (req, res) => {
   if (authenticatedUser(username, password)) {
     let accessToken = jwt.sign({ data: username }, 'access', { expiresIn: 3600 });
     req.session.authorization = { accessToken, username };
-    return res.status(200).json({ message: "User successfully logged in" });
+    return res.status(200).json({ message: "Customer successfully logged in", token: accessToken });
   } else {
     return res.status(208).json({ message: "Invalid Login. Check username and password" });
   }
